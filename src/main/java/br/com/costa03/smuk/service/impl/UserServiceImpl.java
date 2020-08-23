@@ -11,6 +11,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,15 +20,20 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
 
     @Override
+    public UserListDTO saveUser(UserDTO user) {
+        EncryptPasswordUsers(user);
+        User userEncrypt = userMapper.toEntity(user);
+        return userMapper.toListDtoUnic(userRepository.save(userEncrypt));
+    }
+
+    @Override
     public List<UserListDTO> findAllUsers() {
         return userMapper.toListDto(userRepository.findAll());
     }
 
     @Override
-    public UserListDTO saveUser(UserDTO user) {
-        EncryptPasswordUsers(user);
-        User userEncrypt = userMapper.toEntity(user);
-        return userMapper.toListDtoUnic(userRepository.save(userEncrypt));
+    public Optional<UserListDTO> findUser(Long id) {
+        return userRepository.findById(id).map(userMapper::toListDtoUnic);
     }
 
     public void EncryptPasswordUsers(UserDTO user){
