@@ -14,8 +14,6 @@ import java.io.Serializable;
 public class UserListDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-
     private String fullname;
 
     private String username;

@@ -1,26 +1,31 @@
 package br.com.costa03.smuk.web.rest;
 
-import br.com.costa03.smuk.domain.User;
 import br.com.costa03.smuk.service.UserService;
+import br.com.costa03.smuk.service.dto.UserDTO;
 import br.com.costa03.smuk.service.dto.UserListDTO;
+import br.com.costa03.smuk.util.HeaderUtil;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
+@Slf4j
 public class UserResource {
-    private final Logger log = LoggerFactory.getLogger(User.class);
     private final UserService userService;
+    private final HeaderUtil headerUtil = new HeaderUtil();
+    private static final String ENTITY_NAME = "user";
 
     @GetMapping("/users")
     public ResponseEntity<List<UserListDTO>> getAllUsers(){
@@ -29,16 +34,13 @@ public class UserResource {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> saveUsers(){
-        log.debug("REST request to save a of Users");
-        User user = new User();
-        user.setFullname("Maria Olinda Junior");
-        user.setCnpj("2222222222222");
-        user.setPassword("123");
-        user.setUsername("Maria");
-        user.setEnabled(new Boolean("true"));
-        user.setType("admin");
+    public ResponseEntity<UserListDTO> createEditUser(@RequestBody UserDTO userDTO) throws URISyntaxException {
+        log.debug("REST request to save User : {}", userDTO);
 
-        return new ResponseEntity<>(userService.saveUser(user),HttpStatus.OK);
+        UserListDTO result = userService.saveUser(userDTO);
+
+        return ResponseEntity.created(new URI("/api/users"))
+                .headers(headerUtil.createEntityCreationAlert(ENTITY_NAME, result.getFullname()))
+                .body(result);
     }
 }
