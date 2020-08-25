@@ -18,7 +18,3 @@ spring:
         database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     liquibase:
       change-log: classpath:/liquibase/master.xml
-    security:
-      user:
-        name: alexandre
-        password: 123456
