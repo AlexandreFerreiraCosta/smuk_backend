@@ -15,6 +15,6 @@ spring:
         hibernate:
           temp:
             use_jdbc_metadata_defaults: false
-        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+          dialect: org.hibernate.dialect.PostgreSQL9Dialect
     liquibase:
       change-log: classpath:/liquibase/master.xml
