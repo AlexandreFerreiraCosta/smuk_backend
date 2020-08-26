@@ -18,3 +18,10 @@ spring:
           dialect: org.hibernate.dialect.PostgreSQL9Dialect
     liquibase:
       change-log: classpath:/liquibase/master.xml
+    security:
+      oauth2:
+        resourceserver:
+          opaquetoken:
+            introspection-uri: http://localhost:8081/oauth/check_token
+            client-id: checkToken
+            client-secret: 123
