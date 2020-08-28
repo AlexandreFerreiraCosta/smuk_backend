@@ -21,7 +21,7 @@ spring:
     security:
       oauth2:
         resourceserver:
-          opaquetoken:
-            introspection-uri: http://localhost:8081/oauth/check_token
-            client-id: checkToken
-            client-secret: 123
+#logging:
+#  level:
+#    org:
+#      springframework: DEBUG
