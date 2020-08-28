@@ -132,7 +132,6 @@
 			<artifactId>oauth2-oidc-sdk</artifactId>
 			<version>6.21.2</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
