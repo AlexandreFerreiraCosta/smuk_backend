@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="Alexandre Costa" id="202021062115000-01">
+
+        <createTable tableName="rl_user_group" schemaName="public">
+            <column name="id_group" type="BIGINT" remarks="">
+                <constraints primaryKey="true" nullable="true"/>
+            </column>
+
+            <column name="id_user" type="BIGINT" remarks="">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="rl_group_permission"
+                                 baseColumnNames="id_group"
+                                 constraintName="fk_rl_group"
+                                 referencedTableName="tb_group"
+                                 referencedColumnNames="id_group"
+        />
+
+        <addForeignKeyConstraint baseTableName="rl_group_permission"
+                                 baseColumnNames="id_user"
+                                 constraintName="fk_rl_user"
+                                 referencedTableName="tb_user"
+                                 referencedColumnNames="id_user"
+        />
+
+    </changeSet>
+</databaseChangeLog>

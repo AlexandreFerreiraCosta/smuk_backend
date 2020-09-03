@@ -10,9 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -45,4 +50,9 @@ public class User implements Serializable{
 
     @Column(name = "ds_type", nullable = false)
     private String type;
+
+    @ManyToMany
+    @JoinTable(name = "rl_user_group", joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_group"))
+    private Set<Group> groups = new HashSet<>();
 }

@@ -50,4 +50,5 @@ public class UserResource {
     public ResponseEntity<UserListDTO> getUser(@PathVariable Long id){
         return ResponseUtil.wrapOrNotFound(userService.findUser(id));
     }
+
 }
