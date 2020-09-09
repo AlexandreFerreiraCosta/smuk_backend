@@ -2,6 +2,7 @@ package br.com.costa03.smuk.service.impl;
 
 import br.com.costa03.smuk.domain.User;
 import br.com.costa03.smuk.repository.UserRepository;
+import br.com.costa03.smuk.security.CheckSecurity;
 import br.com.costa03.smuk.security.UserSecurity;
 import br.com.costa03.smuk.service.UserService;
 import br.com.costa03.smuk.service.dto.UserDTO;
@@ -10,6 +11,7 @@ import br.com.costa03.smuk.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserService {
     private UserSecurity userSecurity;
 
     @Override
+    @CheckSecurity.User.PermissionI
     public UserListDTO saveUser(UserDTO user) {
         EncryptPasswordUsers(user);
         User userEncrypt = userMapper.toEntity(user);
@@ -34,11 +37,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public List<UserListDTO> findAllUsers() {
         return userMapper.toListDto(userRepository.findAll());
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Optional<UserListDTO> findUser(Long id) {
         //TODO METODO PARA VALIDAR USUÁRIO LOGADO NO CONTEXTO
         System.out.println(userSecurity.getUsuarioId());

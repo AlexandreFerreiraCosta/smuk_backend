@@ -2,6 +2,7 @@ package br.com.costa03.smuk.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,16 +14,13 @@ import java.util.stream.Collectors;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                         .antMatchers(HttpMethod.POST , "/api/users/**").hasAnyAuthority("permissionI")
-                .antMatchers(HttpMethod.GET , "/api/users/**").hasAnyAuthority("permission")
-                .anyRequest().denyAll()
-                .and()
+                .csrf().disable()
                 .cors()
                 .and()
                 .oauth2ResourceServer().jwt()
