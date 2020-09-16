@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="Alexandre Costa" id="202015091917000-01">
+
+        <createTable tableName="oauth_client_details" schemaName="public">
+            <column name="client_id" type="VARCHAR2(255)" remarks="">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="resource_ids" type="VARCHAR2(256)" remarks=""></column>
+            <column name="client_secret" type="VARCHAR2(256)" remarks=""></column>
+            <column name="scope" type="VARCHAR2(255)" remarks=""></column>
+            <column name="authorized_grant_types" type="VARCHAR2(256)" remarks=""></column>
+            <column name="web_server_redirect_uri" type="VARCHAR2(256)" remarks=""></column>
+            <column name="authorities" type="VARCHAR2(256)" remarks=""></column>
+            <column name="access_token_validity" type="BIGINT"></column>
+            <column name="refresh_token_validity" type="BIGINT"></column>
+            <column name="additional_information" type="VARCHAR2(256)" remarks=""></column>
+            <column name="autoapprove" type="VARCHAR2(256)" remarks=""></column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

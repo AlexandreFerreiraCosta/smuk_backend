@@ -6,7 +6,9 @@
     <include file="liquibase/changelog/202003041535000_insert_user.xml" relativeToChangelogFile="false"/>
     <include file="liquibase/changelog/202009020430000_create_tb_permission.xml" relativeToChangelogFile="false"/>
     <include file="liquibase/changelog/202009020510000_create_tb_group.xml" relativeToChangelogFile="false"/>
-    <include file="liquibase/changelog/202021062107000_create_rl_group_permission" relativeToChangelogFile="false"/>
-    <include file="liquibase/changelog/202021152107000_create_rl_user_group" relativeToChangelogFile="false"/>
+<!--    <include file="liquibase/changelog/202021062107000_create_rl_group_permission.xml" relativeToChangelogFile="false"/>-->
+<!--    <include file="liquibase/changelog/202021152107000_create_rl_user_group.xml" relativeToChangelogFile="false"/>-->
+    <include file="liquibase/changelog/202015091917000_create_clients.xml" relativeToChangelogFile="false"/>
+    <include file="liquibase/changelog/V07_15092020_Insert_clients.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
